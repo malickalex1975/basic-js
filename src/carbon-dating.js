@@ -24,8 +24,9 @@ function dateSample( sampleActivity ) {
      sampleActivity=parseFloat(sampleActivity);
     
   let t=Math.ceil(Math.log(MODERN_ACTIVITY/sampleActivity)/k);
-  }
+  
   return t
+  }
 }
 
 module.exports = {
