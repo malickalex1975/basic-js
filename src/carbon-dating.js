@@ -25,7 +25,7 @@ function dateSample( sampleActivity ) {
     
     
   let t=Math.ceil(Math.log(MODERN_ACTIVITY/sampleActivity)/k);
-  if (t>=0){
+  if (t>=0 && t!=Infinity){
   return t
   }
     return false
