@@ -13,9 +13,46 @@ const { NotImplementedError } = require('../extensions/index.js');
  * transform([1, 2, 3, '--discard-prev', 4, 5]) => [1, 2, 4, 5]
  * 
  */
-function transform(/* arr */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+function transform( arr ) {
+  if (!(arr instanceof Array)){
+    throw new Error("'arr' parameter must be an instance of the Array!")
+  }
+  const exception= ["--discard-next","--discard-prev","--double-next","--double-prev"]
+  var len =arr.length;
+  var out=[];
+  for(let i=0;i<len;i++){
+    if (arr[i]==undefined){
+      i++;
+    }
+    if(arr[i]=="--discard-next"){
+     if(i<len-2) {i=i+2;}
+    }
+    if(arr[i]=="--discard-prev"){
+      if (i>0 && arr[i-2]!="--discard-next"){
+
+      out.pop();}
+    }
+    if(arr[i]=="--double-next"){
+      if (i<len-1 && arr[i+1]!=undefined){
+      out.push(arr[i+1]);}
+    }
+    if(arr[i]=="--double-prev"){
+      if(i>0 && arr[i-1]!=undefined && !(exception.includes(arr[i-1]))){
+        if (arr[i-2]!="--discard-next"){
+      out.push(arr[i-1]);}
+      }
+    }
+    if(arr[i]!="--discard-next" && arr[i]!="--discard-prev" && arr[i]!="--double-prev" && arr[i]!="--double-next"){
+      if (arr[i] instanceof Array){out.push(transform(arr[i]))}
+        else{out.push(arr[i])}
+    }
+
+
+      
+
+  }
+  return out
+
 }
 
 module.exports = {
