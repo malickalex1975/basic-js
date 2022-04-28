@@ -16,7 +16,8 @@ function getSeason( date ) {
   if (date== null ){return 'Unable to determine the time of year!'}
    var seasonDate= new Date(date);
    if (seasonDate.toString()=="Invalid Date"|| date==""|| 
-   typeof date=='undefined'|| (date instanceof Date)===false || date instanceof String){
+   typeof date=='undefined'|| (date instanceof Date)===false || date instanceof String 
+   || date.hasOwnProperty("getMonth") ) {
       throw new Error('Invalid date!');
    }
    else {
