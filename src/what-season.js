@@ -17,16 +17,17 @@ function getSeason( date ) {
    var seasonDate= new Date(date);
    if (seasonDate.toString()=="Invalid Date"|| date==""|| 
    typeof date=='undefined'|| (date instanceof Date)===false || date instanceof String 
-   || date.hasOwnProperty("getMonth") ) {
+   || date.hasOwnProperty("getMonth") || date.hasOwnProperty("toString")) {
       throw new Error('Invalid date!');
    }
    else {
       var month= date.getMonth();
       var day= date.getDay();
-     if (  date.hasOwnProperty("toString")){
+    /*  for (let name in date){
+     if (  name==("toString")){
       throw new Error('Invalid date!');
-
      }
+     }*/
      if (month==11 || month==0 || month == 1){ return "winter"};
      if (month==2 || month==3 || month == 4){ return "spring"};
      if (month==5 || month==6 || month == 7){ return "summer"};

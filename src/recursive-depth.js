@@ -18,16 +18,16 @@ class DepthCalculator {
   calculateDepth(arr) {
     if (arr instanceof Array){
       if (arr.length==0){return 1}
-      if (arr.length>0){
-        var maxdepth=0
+      
+        let maxdepth=0;
         for (let a of arr){
 
-          var depth=new DepthCalculator().calculateDepth(a);
+          let depth=new DepthCalculator().calculateDepth(a);
           if (depth>maxdepth){maxdepth=depth}
         }
         return 1+maxdepth
       }
-    }
+    
     else return 0
     
   }
