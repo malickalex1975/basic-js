@@ -33,11 +33,45 @@ function minesweeper(arr) {
     out.push(s1);
   }
   for (let j=0;j<m;j++){
-    x=0;
+   var x=0;
     for(let i=0;i<n;i++){
-       x = arr[j-1][i]//+Boolean(arr[j+1][i+1])+Boolean(arr[j+1][i-1])+Boolean(arr[j][i+1])
-      //+Boolean(arr[j][i-1])+!Boolean(arr[j-1][i])+Boolean(arr[j-1][i-1])+Boolean(arr[j-1][i+1] );
+      if(i!=0 && j!=0 && j<m-1 && i<n-1){
+       x= arr[j+1][i]+Boolean(arr[j+1][i+1])+Boolean(arr[j+1][i-1])+Boolean(arr[j][i+1])
+      +Boolean(arr[j][i-1])+Boolean(arr[j-1][i])+Boolean(arr[j-1][i-1])+Boolean(arr[j-1][i+1] );
+      }
       
+      if(i==0 && j!=0 && j<m-1 && i<n-1){
+       x= arr[j+1][i]+Boolean(arr[j+1][i+1])+Boolean(arr[j][i+1])
+      +Boolean(arr[j-1][i])+Boolean(arr[j-1][i+1] );
+      }
+      if(i!=0 && j==0 && j<m-1 && i<n-1){
+       x= arr[j+1][i]+Boolean(arr[j+1][i+1])+Boolean(arr[j+1][i-1])+Boolean(arr[j][i+1])
+      +Boolean(arr[j][i-1]);
+      }
+      if(i!=0 && j!=0 && j==m-1 && i<n-1){
+       x= +Boolean(arr[j][i+1])
+      +Boolean(arr[j][i-1])+Boolean(arr[j-1][i])+Boolean(arr[j-1][i-1])+Boolean(arr[j-1][i+1] );
+      }
+      if(i!=0 && j!=0 && j<m-1 && i==n-1){
+       x= arr[j+1][i]+Boolean(arr[j+1][i-1])
+      +Boolean(arr[j][i-1])+Boolean(arr[j-1][i])+Boolean(arr[j-1][i-1]) ;
+      }
+      if(i==0 && j==0 && j<m-1 && i<n-1){
+       x= arr[j+1][i]+Boolean(arr[j+1][i+1])+Boolean(arr[j][i+1]);
+      }
+      if(i!=0 && j!=0 && j==m-1 && i==n-1){
+       x= 
+      +Boolean(arr[j][i-1])+Boolean(arr[j-1][i])+Boolean(arr[j-1][i-1]);
+      }
+      if(i==0 && j!=0 && j==m-1 && i<n-1){
+       x= Boolean(arr[j][i+1])
+      +Boolean(arr[j-1][i])+Boolean(arr[j-1][i+1] );
+      }
+      if(i!=0 && j==0 && j<m-1 && i==n-1){
+       x= arr[j+1][i]+Boolean(arr[j+1][i-1])
+      +Boolean(arr[j][i-1]);
+      }
+
       out[j][i]=x;
     }
     

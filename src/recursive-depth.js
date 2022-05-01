@@ -22,7 +22,7 @@ class DepthCalculator {
         let maxdepth=0;
         for (let a of arr){
 
-          let depth=new DepthCalculator().calculateDepth(a);
+          let depth=this.calculateDepth(a);
           if (depth>maxdepth){maxdepth=depth}
         }
         return 1+maxdepth
