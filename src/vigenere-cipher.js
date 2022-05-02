@@ -26,11 +26,13 @@ class VigenereCipheringMachine {
 
 
   encrypt(message,key) {
-    if (message===undefined|| key=== undefined || message===null || key ===null){
+    if (message==undefined|| key== undefined ){
       throw new Error("Incorrect arguments!");}
       key=key.toLowerCase();
       message=message.toLowerCase();
-       for (let i=0;i<Math.ceil(message.length/key.length)+2;i++){key=key+key}
+      while (key.length<message.length){
+        key+=key;
+      }
       key= key.slice(0,message.length);
       key=key.split('');
       lst=[];
@@ -54,12 +56,14 @@ class VigenereCipheringMachine {
   
 
   decrypt(message,key) {
-    if (message==undefined|| key==undefined  || message===null || key ===null){
+    if (message==undefined|| key==undefined ){
       throw new Error("Incorrect arguments!");
     }
     message= message.toLowerCase();
     key=key.toLowerCase();
-    for (let i=0;i<Math.ceil(message.length/key.length)+20;i++){key=key+key}
+    while (key.length<message.length){
+      key+=key;
+    }
     key= key.slice(0,message.length);
     key=key.split('');
     lst=[];
