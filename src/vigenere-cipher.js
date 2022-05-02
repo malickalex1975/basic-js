@@ -20,15 +20,67 @@ const { NotImplementedError } = require('../extensions/index.js');
  * 
  */
 class VigenereCipheringMachine {
-  encrypt() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    constructor(straight=true){
+      this.straight=straight;
+    }
+
+
+  encrypt(message,key) {
+    if (message===undefined|| key=== undefined || message===null || key ===null){
+      throw new Error("Incorrect arguments!");}
+      key=key.toLowerCase();
+      message=message.toLowerCase();
+       for (let i=0;i<Math.ceil(message.length/key.length)+2;i++){key=key+key}
+      key= key.slice(0,message.length);
+      key=key.split('');
+      lst=[];
+      message=message.split('');
+      var j=-1;
+      for (let i=0;i<message.length;i++){
+       let m = message[i].charCodeAt(0);
+        if(m<97 || m>122 ){lst.push(String.fromCharCode(m));}
+            else{
+              j++;
+              let k= key[j].charCodeAt(0);
+              let c=(m-97+k-97)%26+97;
+              lst.push(String.fromCharCode(c))
+            }
+          }
+      if (!this.straight){lst.reverse()}
+      return lst.join('').toUpperCase()
+    }
+
+    
+  
+
+  decrypt(message,key) {
+    if (message==undefined|| key==undefined  || message===null || key ===null){
+      throw new Error("Incorrect arguments!");
+    }
+    message= message.toLowerCase();
+    key=key.toLowerCase();
+    for (let i=0;i<Math.ceil(message.length/key.length)+20;i++){key=key+key}
+    key= key.slice(0,message.length);
+    key=key.split('');
+    lst=[];
+    message=message.split('');
+    let j=-1;
+    for (let i=0;i<message.length;i++){
+    let  m = message[i].charCodeAt(0);
+    let k= key[i].charCodeAt(0);
+      if(m<97 || m>122 ){lst.push(String.fromCharCode(m))}
+          else{
+            j++;
+            let k= key[j].charCodeAt(0);
+            let c=((m-k+26))%26+97;
+            lst.push(String.fromCharCode(c))
+          }
+        }
+    if (!this.straight){lst.reverse()}
+    return lst.join('').toUpperCase()
   }
-  decrypt() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
   }
-}
+
 
 module.exports = {
   VigenereCipheringMachine
